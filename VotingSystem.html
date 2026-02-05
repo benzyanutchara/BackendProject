@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Voting System</title>
+  <link rel="stylesheet" href="./VotingSystem.css" />
+</head>
+
+<body>
+  <div class="page">
+    <div class="wrap">
+      <h1 class="title">Voting System 953713 - 2568</h1>
+
+      <!-- Segmented Tabs -->
+      <div class="segmented" role="tablist" aria-label="Voting navigation">
+        <button class="seg-btn active" role="tab" aria-selected="true" data-tab="results">
+          <span class="seg-ico" aria-hidden="true">
+            <!-- results icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 7.5h6M4 12h10M4 16.5h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M15 8l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          ผลการเลือกตั้ง
+        </button>
+
+        <button class="seg-btn" role="tab" aria-selected="false" data-tab="parties">
+          <span class="seg-ico" aria-hidden="true">
+            <!-- people icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M16 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 12a3 3 0 1 0-3-3 3 3 0 0 0 3 3Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M2.5 20c.7-3 2.8-5 5.5-5s4.8 2 5.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M13 20c.4-2.1 1.7-3.7 3.5-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          พรรคการเมือง
+        </button>
+
+        <button class="seg-btn" role="tab" aria-selected="false" data-tab="vote">
+          <span class="seg-ico" aria-hidden="true">
+            <!-- checkbox icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M20 6.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M9 12l2 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          ลงคะแนน
+        </button>
+      </div>
+
+      <!-- Card -->
+      <section class="card">
+        <div class="card-top">
+          <div class="select-wrap">
+            <select id="districtSelect" class="select">
+              <option value="">เลือกเขตเลือกตั้ง</option>
+              <option value="1">เขต 1 เขตพระนคร, เขตสัมพันธวงศ์, เขตบางรัก, เขตป้อมปราบศัตรูพ่าย และเขตดุสิต (ยกเว้นแขวงถนนนครไชยศรี)</option>
+              <option value="2">เขต 2 เขตราชเทวี, เขตปทุมวัน และเขตสาทร</option>
+              <option value="3">เขต 3 เขตบางคอแหลมและเขตยานนาวา</option>
+              <option value="4">เขต 4 เขตคลองเตยและเขตวัฒนา</option>
+              <option value="5">เขต 5 เขตห้วยขวางและเขตวังทองหลาง (ยกเว้นแขวงคลองเจ้าคุณสิงห์)</option>
+              <option value="6">เขต 6 เขตพญาไทและเขตดินแดง</option>
+              <option value="7">เขต 7 เขตบางซื่อและเขตดุสิต (เฉพาะแขวงถนนนครไชยศรี)</option>
+              <option value="8">เขต 8 เขตจตุจักร (ยกเว้นแขวงจันทรเกษมและแขวงเสนานิคม) และเขตหลักสี่ (เฉพาะแขวงทุ่งสองห้อง)</option>
+              <option value="9">เขต 9 เขตจตุจักร (เฉพาะแขวงจันทรเกษมและแขวงเสนานิคม), เขตบางเขน (เฉพาะแขวงอนุสาวรีย์) และเขตหลักสี่ (เฉพาะแขวงตลาดบางเขน)</option>
+              <option value="10">เขต 10 เขตดอนเมือง</option>
+              <option value="11">เขต 11 เขตสายไหม (ยกเว้นแขวงออเงิน)</option>
+              <option value="12">เขต 12 เขตสายไหม (เฉพาะแขวงออเงิน), เขตบางเขน (เฉพาะแขวงท่าแร้ง) และเขตลาดพร้าว (เฉพาะแขวงจรเข้บัว)</option>
+              <option value="13">เขต 13 เขตลาดพร้าว (เฉพาะแขวงลาดพร้าว) และเขตบึงกุ่ม (ยกเว้นแขวงคลองกุ่ม)</option>
+              <option value="14">เขต 14 เขตบางกะปิและเขตวังทองหลาง (เฉพาะแขวงคลองเจ้าคุณสิงห์)</option>
+              <option value="15">เขต 15 เขตคันนายาวและเขตบึงกุ่ม (เฉพาะแขวงคลองกุ่ม)</option>
+              <option value="16">เขต 16 เขตคลองสามวา (ยกเว้นแขวงสามวาตะวันออกและแขวงทรายกองดินใต้)</option>
+              <option value="17">เขต 17 เขตคลองสามวา (เฉพาะแขวงสามวาตะวันออกและแขวงทรายกองดินใต้) และเขตหนองจอก (ยกเว้นแขวงลำต้อยติ่ง แขวงลำผักชี และแขวงโคกแฝด)</option>
+              <option value="18">เขต 18 เขตหนองจอก (เฉพาะแขวงลำต้อยติ่ง แขวงลำผักชี และแขวงโคกแฝด), เขตลาดกระบัง (เฉพาะแขวงลำปลาทิว) และเขตมีนบุรี (เฉพาะแขวงแสนแสบ)</option>
+              <option value="19">เขต 19 เขตมีนบุรี (เฉพาะแขวงมีนบุรี) และเขตสะพานสูง (ยกเว้นแขวงทับช้าง)</option>
+              <option value="20">เขต 20 เขตลาดกระบัง (ยกเว้นแขวงลำปลาทิว)</option>
+              <option value="21">เขต 21 เขตสะพานสูง (เฉพาะแขวงทับช้าง) และเขตประเวศ (ยกเว้นแขวงหนองบอน)</option>
+              <option value="22">เขต 22 เขตสวนหลวงและเขตประเวศ (เฉพาะแขวงหนองบอน)</option>
+              <option value="23">เขต 23 เขตพระโขนงและเขตบางนา</option>
+              <option value="24">เขต 24 เขตคลองสาน, เขตธนบุรี (ยกเว้นแขวงวัดกัลยาณ์ แขวงหิรัญรูจี และแขวงบางยี่เรือ) และเขตราษฎร์บูรณะ (เฉพาะแขวงบางปะกอก)</option>
+              <option value="25">เขต 25 เขตทุ่งครุและเขตราษฎร์บูรณะ (เฉพาะแขวงราษฎร์บูรณะ)</option>
+              <option value="26">เขต 26 เขตบางขุนเทียน (เฉพาะแขวงท่าข้าม) และเขตจอมทอง (ยกเว้นแขวงบางขุนเทียน)</option>
+              <option value="27">เขต 27 เขตบางขุนเทียน (เฉพาะแขวงแสมดำ) และเขตบางบอน (เฉพาะแขวงบางบอนใต้และแขวงคลองบางบอน)</option>
+              <option value="28">เขต 28 เขตจอมทอง (เฉพาะแขวงบางขุนเทียน), เขตบางบอน (เฉพาะแขวงคลองบางพรานและแขวงบางบอนเหนือ) และเขตหนองแขม (เฉพาะแขวงหนองแขม)</option>
+              <option value="29">เขต 29 เขตหนองแขม (เฉพาะแขวงหนองค้างพลู) และเขตบางแค (เฉพาะแขวงบางไผ่และแขวงบางแคเหนือ)</option>
+              <option value="30">เขต 30 เขตบางแค (เฉพาะแขวงหลักสองและแขวงบางแค) และเขตภาษีเจริญ (เฉพาะแขวงบางหว้า แขวงบางด้วน และแขวงคลองขวาง)</option>
+              <option value="31">เขต 31 เขตทวีวัฒนาและเขตตลิ่งชัน (ยกเว้นแขวงบางเชือกหนัง)</option>
+              <option value="32">เขต 32 เขตบางกอกใหญ่, เขตธนบุรี (เฉพาะแขวงวัดกัลยาณ์ แขวงหิรัญรูจี และแขวงบางยี่เรือ), เขตภาษีเจริญ (ยกเว้นแขวงบางหว้า แขวงบางด้วน และแขวงคลองขวาง), เขตตลิ่งชัน (เฉพาะแขวงบางเชือกหนัง) และเขตบางกอกน้อย (เฉพาะแขวงศิริราช)</option>
+              <option value="33">เขต 33 เขตบางพลัดและเขตบางกอกน้อย (ยกเว้นแขวงศิริราช)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="th-click" data-sort="province">
+                  <span class="th-label">Province <span class="sort">↕</span></span>
+                </th>
+                <th class="th-click right" data-sort="district">
+                  <span class="th-label">เขต <span class="sort">↕</span></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              <!-- JS will render rows here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // ----- Demo data -----
+    const rows = [
+      { province: "กรุงเทพมหานครฯ", district: "1" },
+      { province: "กรุงเทพมหานครฯ", district: "2" },
+      { province: "กรุงเทพมหานครฯ", district: "3" },
+      { province: "กรุงเทพมหานครฯ", district: "4" },
+      { province: "กรุงเทพมหานครฯ", district: "5" },
+      { province: "กรุงเทพมหานครฯ", district: "6" },
+      { province: "กรุงเทพมหานครฯ", district: "7" },
+      { province: "กรุงเทพมหานครฯ", district: "8" },
+      { province: "กรุงเทพมหานครฯ", district: "9" },
+      { province: "กรุงเทพมหานครฯ", district: "10" },
+      { province: "กรุงเทพมหานครฯ", district: "11" },
+      { province: "กรุงเทพมหานครฯ", district: "12" },
+      { province: "กรุงเทพมหานครฯ", district: "13" },
+      { province: "กรุงเทพมหานครฯ", district: "14" },
+      { province: "กรุงเทพมหานครฯ", district: "15" },
+      { province: "กรุงเทพมหานครฯ", district: "16" },
+      { province: "กรุงเทพมหานครฯ", district: "17" },
+      { province: "กรุงเทพมหานครฯ", district: "18" },
+      { province: "กรุงเทพมหานครฯ", district: "19" },
+      { province: "กรุงเทพมหานครฯ", district: "20" },
+      { province: "กรุงเทพมหานครฯ", district: "21" },
+      { province: "กรุงเทพมหานครฯ", district: "22" },
+      { province: "กรุงเทพมหานครฯ", district: "23" },
+      { province: "กรุงเทพมหานครฯ", district: "24" },
+      { province: "กรุงเทพมหานครฯ", district: "25" },
+      { province: "กรุงเทพมหานครฯ", district: "26" }, 
+      { province: "กรุงเทพมหานครฯ", district: "27" },
+      { province: "กรุงเทพมหานครฯ", district: "28" },
+      { province: "กรุงเทพมหานครฯ", district: "29" },
+      { province: "กรุงเทพมหานครฯ", district: "30" },
+      { province: "กรุงเทพมหานครฯ", district: "31" },
+      { province: "กรุงเทพมหานครฯ", district: "32" },
+      { province: "กรุงเทพมหานครฯ", district: "33" },
+    ];
+
+    // ----- State -----
+    let sortBy = "province";
+    let sortDir = "asc"; // asc | desc
+    let selectedDistrict = "";
+
+    const tbody = document.getElementById("tbody");
+    const districtSelect = document.getElementById("districtSelect");
+
+    function render() {
+      // filter
+      let data = [...rows];
+      if (selectedDistrict) {
+        data = data.filter(r => String(r.district) === String(selectedDistrict));
+      }
+
+      // sort
+      const dir = sortDir === "asc" ? 1 : -1;
+      data.sort((a, b) => {
+        const av = String(a[sortBy]).toLowerCase();
+        const bv = String(b[sortBy]).toLowerCase();
+        if (av < bv) return -1 * dir;
+        if (av > bv) return  1 * dir;
+        return 0;
+      });
+
+      // paint
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td class="empty" colspan="2">ยังไม่มีข้อมูล</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = data.map(r => `
+        <tr>
+          <td>${r.province}</td>
+          <td class="right">${r.district}</td>
+        </tr>
+      `).join("");
+    }
+
+    // select change
+    districtSelect.addEventListener("change", (e) => {
+      selectedDistrict = e.target.value;
+      render();
+    });
+
+    // sortable headers
+    document.querySelectorAll(".th-click").forEach(th => {
+      th.addEventListener("click", () => {
+        const key = th.dataset.sort;
+        if (sortBy === key) {
+          sortDir = sortDir === "asc" ? "desc" : "asc";
+        } else {
+          sortBy = key;
+          sortDir = "asc";
+        }
+        render();
+      });
+    });
+
+    // segmented tabs (visual only)
+    document.querySelectorAll(".seg-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".seg-btn").forEach(b => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+        });
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
